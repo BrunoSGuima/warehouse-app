@@ -1,0 +1,53 @@
+<h2> Cadastrar Novo Modelo de Produto: </h2>
+
+	<% if(@product_model.errors.any?) %>
+
+		<p> Verifique os erros abaixo: </p>
+		<ul>
+			<% @product_model.errors.full_messages.each do |msg| %>
+				<li><%= msg %> </li>
+			<% end %>
+		</ul>
+	<% end %>
+
+<%= form_with(model: @product_model) do |f| %>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+		</div> <br>	
+
+		<div>
+			<%= f.label :weight %>
+      <%= f.number_field :weight %>
+		</div> <br>
+		
+		<div>
+			<%= f.label :width %>
+      <%= f.number_field :width %>
+		</div> <br>
+
+		<div>	
+			<%= f.label :height %>
+      <%= f.number_field :height %>
+		</div> <br>
+
+		<div>	
+			<%= f.label :depth %>
+      <%= f.number_field :depth %>
+		</div>	<br>
+
+		<div>
+			<%= f.label :sku %>
+      <%= f.text_field :sku %>
+		</div>	<br>
+
+		<div>
+			<%= f.label :supplier_id %>
+			<%= f.collection_select :supplier_id, @suppliers, :id, :brand_name %>
+		</div>	<br>
+
+		<div>
+			<%= f.submit 'Enviar' %>
+		</div>
+
+ <% end %>

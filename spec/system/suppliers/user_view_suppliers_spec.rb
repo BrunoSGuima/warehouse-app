@@ -29,7 +29,7 @@ describe "Usuário vê fornecedores" do
     
   end
 
-  it "cadastrados" do
+  it "e não existem fornecedores cadastrados" do
     #Arrange
 
     
