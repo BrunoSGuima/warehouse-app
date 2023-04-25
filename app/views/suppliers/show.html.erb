@@ -1,0 +1,15 @@
+<h3>Fornecedores <%= @supplier.brand_name %></h3>
+<strong> <%= @supplier.corporate_name %> </strong>
+	
+  <dl>
+    	<dt> Documento: </dt>
+    	<dd><%= @supplier.registration_number %> </dd>
+    	<dt> Endereço: </dt>
+    	<dd> <%= @supplier.full_address %> - <%= @supplier.city%> - <%= @supplier.state %> </dd>
+			<dt> E=mail: </dt>
+    	<dd><%= @supplier.email %> </dd>
+	</dl>
+
+
+<%= link_to('Editar', edit_supplier_path(@supplier)) %>
+<%= link_to('Voltar', root_path) %>
