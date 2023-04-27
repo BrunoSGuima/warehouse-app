@@ -1,4 +1,5 @@
 class ProductModelsController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
   def index
     @product_models = ProductModel.all
   end
@@ -9,11 +10,13 @@ class ProductModelsController < ApplicationController
   end
 
   def create
+    
     @product_model = ProductModel.new(product_model_params)
     if @product_model.save
       redirect_to @product_model, notice: 'Modelo de produto cadastrado com sucesso.'
     else
-      flash[:error] = "Modelo de Produto não cadastrado"
+      @suppliers = Supplier.all
+      flash.now[:notice] = 'Não foi possível cadastrar o modelo de produto'
       render 'new'
     end
   end
