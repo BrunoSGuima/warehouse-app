@@ -20,5 +20,6 @@ pt-BR:
         city: 'Cidade'
         state: 'Estado'
         email: 'E-mail'
+        name: "Fornecedor"
 
       # will translate User attribute "login" as "Handle"
