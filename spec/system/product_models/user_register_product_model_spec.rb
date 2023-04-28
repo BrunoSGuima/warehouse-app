@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Usuário registra um modelo de produto" do
   it "com sucesso" do
-    #Arrenge
+    #Arrange
     user = User.create!(email: 'bruno@email.com', password: 'password')
     supplier = Supplier.create!(corporate_name: 'Samsung Eletronics LTDA', brand_name: 'Samsung', registration_number:'12645-412', 
                               full_address: 'Rua da Samsung, 09', city: 'São Paulo', state:'SP', email: 'sac@samsung.com')
@@ -33,7 +33,7 @@ describe "Usuário registra um modelo de produto" do
   end
 
   it "deve preencher todos os campos" do
-    #Arrenge
+    #Arrange
     user = User.create!(email: 'bruno@email.com', password: 'password')
     Supplier.create!(corporate_name: 'Samsung Eletronics LTDA', brand_name: 'Samsung', registration_number:'12645-412', 
                                 full_address: 'Rua da Samsung, 09', city: 'São Paulo', state:'SP', email: 'sac@samsung.com')

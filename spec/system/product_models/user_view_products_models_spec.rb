@@ -4,7 +4,7 @@ describe "Usuário vê modelos de produtos" do
 
   it "se estiver autenticado" do
 
-    #Arrenge
+    #Arrange
     
     #Act
     visit root_path
@@ -19,7 +19,7 @@ describe "Usuário vê modelos de produtos" do
 
   it "a partir do menu" do
 
-    #Arrenge
+    #Arrange
     user = User.create!(email: 'bruno@email.com', password: 'password')
     #Act
     login_as(user)
@@ -34,7 +34,7 @@ describe "Usuário vê modelos de produtos" do
 
   it "com sucesso" do
 
-    #Arrenge
+    #Arrange
     user = User.create!(email: 'bruno@email.com', password: 'password')
     sup1 = Supplier.create!(corporate_name: 'Samsung Eletronics LTDA', brand_name: 'Samsung', registration_number:'12645-412', 
                                 full_address: 'Rua da Samsung, 09', city: 'São Paulo', 

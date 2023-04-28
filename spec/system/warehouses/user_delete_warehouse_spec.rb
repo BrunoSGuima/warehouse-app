@@ -3,18 +3,20 @@ require 'rails_helper'
 describe "Usúario remove um galpão" do
   it "com sucesso" do
 
-    #Arrange
-      #Criar um galpão
-      warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
+  	#Arrange
+  	#Criar um galpão
+  	user = User.create!(email: 'bruno@email.com', password: 'password')
+    warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
                                     description:'Galpão do aeroporto do Rio', address: 'Avenida Atlantica, 10')
 
     #Act
-      #visitar a tela inicial
-      visit root_path
-      #abrir o galpão
-      click_on 'Rio'
-      #clicar em remover
-      click_on 'Remover'
+    #visitar a tela inicial
+    login_as(user)
+    visit root_path
+    #abrir o galpão
+    click_on 'Rio'
+    #clicar em remover
+    click_on 'Remover'
 
     #Assert
     expect(current_path).to eq root_path
@@ -28,20 +30,22 @@ describe "Usúario remove um galpão" do
 
   it "com sucesso" do
 
-    #Arrange
-      #Criar um galpão
-      first_warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
+  	#Arrange
+    #Criar um galpão
+    user = User.create!(email: 'bruno@email.com', password: 'password')
+    first_warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
                                     description:'Galpão do aeroporto do Rio', address: 'Avenida Atlantica, 10')
-      second_warehouse = Warehouse.create!(name: 'Belo Horizonte', code: 'BHZ', city:'Belo Horizonte', area: 20000, cep: '46000-000', 
+    second_warehouse = Warehouse.create!(name: 'Belo Horizonte', code: 'BHZ', city:'Belo Horizonte', area: 20000, cep: '46000-000', 
                                       description:'Galpão do aeroporto do Belo Horizonte', address: 'Avenida Tiradentes, 20')
 
     #Act
+    login_as(user)
       #visitar a tela inicial
-      visit root_path
+    visit root_path
       #abrir o galpão
-      click_on 'Rio'
+    click_on 'Rio'
       #clicar em remover
-      click_on 'Remover'
+    click_on 'Remover'
 
     #Assert
     expect(current_path).to eq root_path

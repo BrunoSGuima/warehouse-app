@@ -6,10 +6,11 @@ describe "Usuário edita um fornecedor" do
 
     #Arrange
     #Criar um galpão no banmdo de dados
+    user = User.create!(email: 'bruno@email.com', password: 'password')
     supplier = Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', full_address: 'Rua do Facebook, 09', city: 'São Paulo', 
       state:'SP', email: 'sac.facebook@facebook.com')
     #Act
-    #abrir a app
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on "Facebook"
@@ -35,10 +36,13 @@ describe "Usuário edita um fornecedor" do
 
       #Arrange
       #Criar um galpão no banmdo de dados
+      user = User.create!(email: 'bruno@email.com', password: 'password')
+    
       supplier = Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', full_address: 'Rua do Facebook, 09', city: 'São Paulo', 
                                   state:'SP', email: 'sac.facebook@facebook.com')
   
       #Act
+      login_as(user)
       visit root_path
       click_on 'Fornecedores'
       click_on "Facebook"
@@ -59,12 +63,13 @@ describe "Usuário edita um fornecedor" do
     it "mantém os campos obrigatórios" do
 
       #Arrange
-
+      user = User.create!(email: 'bruno@email.com', password: 'password')
       supplier = Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', full_address: 'Rua do Facebook, 09', city: 'São Paulo', 
         state:'SP', email: 'sac.facebook@facebook.com')
 
       #Act
       #abrir a app
+      login_as(user)
       visit root_path
 
       visit root_path

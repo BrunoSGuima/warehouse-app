@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe "Usuário vê fornecedores" do
   it "a partir do menu" do
+    user = User.create!(email: 'bruno@email.com', password: 'password')
     
+    login_as(user)
     visit root_path
     within ('nav') do
       click_on 'Fornecedores'
@@ -13,11 +15,13 @@ describe "Usuário vê fornecedores" do
 
   it "cadastrados" do
     #Arrange
+    user = User.create!(email: 'bruno@email.com', password: 'password')
     Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', full_address: 'Rua do Facebook, 09', city: 'São Paulo', 
       state:'SP', email: 'sac.facebook@facebook.com')
     Supplier.create!(corporate_name: 'Microsoft', brand_name: 'Microsoft', registration_number:'111111-222', full_address: 'Rua da Microsoft, 10', city: 'Salvador', 
       state:'BA', email: 'sac.microsoft@microsoft.com')
     
+    login_as(user)
     visit root_path  
     click_on 'Fornecedores'
 
@@ -31,8 +35,10 @@ describe "Usuário vê fornecedores" do
 
   it "e não existem fornecedores cadastrados" do
     #Arrange
-
+    user = User.create!(email: 'bruno@email.com', password: 'password')
     
+
+    login_as(user)
     visit root_path  
     click_on 'Fornecedores'
 

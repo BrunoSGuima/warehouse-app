@@ -3,12 +3,14 @@ require 'rails_helper'
 describe 'Usuário vê detalhes de um galpão' do
   it 'e vê informações adicionais' do
     # Arrange
+    user = User.create!(email: 'bruno@email.com', password: 'password')
     w = Warehouse.new(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000, 
                       address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
                      description: 'Galpão destinado para cargas internacionais')
     w.save()
 
     # Act
+    login_as(user)
     visit(root_path)
     click_on('Aeroporto SP')
 
@@ -23,11 +25,13 @@ describe 'Usuário vê detalhes de um galpão' do
 
   it 'e volta para a tela inicial' do
     # Arrange
-    Warehouse.create(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000, 
+    user = User.create!(email: 'bruno@email.com', password: 'password')
+    Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000, 
       address: 'Avenida do Aeroporto, 1000', cep: '15000-000', 
      description: 'Galpão destinado para cargas internacionais')
 
     # Act
+    login_as(user)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Voltar'

@@ -5,11 +5,13 @@ describe "Usuário edita um galpão" do
   it "a partir da página de detalhes" do
 
     #Arrange
-    #Criar um galpão no banmdo de dados
-      warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
+    #Criar um galpão no banco de dados
+    user = User.create!(email: 'bruno@email.com', password: 'password')
+    warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
                                 description:'Galpão do aeroporto do Rio', address: 'Avenida Atlantica, 10')
 
     #Act
+    login_as(user)
     #abrir a app
     visit root_path
     #visitar o galpão
@@ -35,11 +37,13 @@ describe "Usuário edita um galpão" do
   it "com sucesso" do
 
     #Arrange
-    #Criar um galpão no banmdo de dados
-      warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
+    #Criar um galpão no banco de dados
+    user = User.create!(email: 'bruno@email.com', password: 'password')
+    warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
                                 description:'Galpão do aeroporto do Rio', address: 'Avenida Atlantica, 10')
 
     #Act
+    login_as(user)
     visit root_path
     #visitar o galpão
     click_on 'Rio'
@@ -61,12 +65,14 @@ describe "Usuário edita um galpão" do
   it "mantém os campos obrigatórios" do
 
     #Arrange
-    #Criar um galpão no banmdo de dados
-      warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
+    #Criar um galpão no banco de dados
+    user = User.create!(email: 'bruno@email.com', password: 'password')
+    warehouse = Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
                                 description:'Galpão do aeroporto do Rio', address: 'Avenida Atlantica, 10')
 
     #Act
     #abrir a app
+    login_as(user)
     visit root_path
     #visitar o galpão
     click_on 'Rio'

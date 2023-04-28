@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Usuário se autentica" do
   it "com sucesso" do
-    # Arrenge
+    # Arrange
     User.create!(email: 'bruno@email.com', password: 'password')
 
     #Act
@@ -24,7 +24,7 @@ describe "Usuário se autentica" do
   end
 
   it "e faz logout" do
-    # Arrenge
+    # Arrange
     User.create!(email: 'bruno@email.com', password: 'password')
 
     #Act

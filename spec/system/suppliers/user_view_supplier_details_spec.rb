@@ -2,9 +2,11 @@ require 'rails_helper'
 
 describe "Usuário vê detalhes do fornecedor" do
   it "a partir da tela inicial" do
+    user = User.create!(email: 'bruno@email.com', password: 'password')
     Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', full_address: 'Rua do Facebook, 09', city: 'São Paulo', 
-      state:'SP', email: 'sac.facebook@facebook.com')
+                    state:'SP', email: 'sac.facebook@facebook.com')
 
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Facebook'
@@ -19,9 +21,11 @@ describe "Usuário vê detalhes do fornecedor" do
   end
 
   it "e volta para a tela inicial" do
+    user = User.create!(email: 'bruno@email.com', password: 'password')
     Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', full_address: 'Rua do Facebook, 09', city: 'São Paulo', 
       state:'SP', email: 'sac.facebook@facebook.com')
 
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Facebook'
