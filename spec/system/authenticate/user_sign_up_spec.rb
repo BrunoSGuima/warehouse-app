@@ -4,7 +4,6 @@ describe "Usuário se autentica" do
   it "com sucesso" do
 
     visit root_path
-    click_on 'Entrar'
     click_on 'Criar Conta'
     fill_in "E-mail",	with: "jessica@email.com"
     fill_in "Senha",	with: "password" 

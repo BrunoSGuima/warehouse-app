@@ -5,7 +5,8 @@ describe 'Usuario visita tela inicial' do
     #Arrange
 
     #Act
-    visit(root_path)
+    visit root_path
+
 
     #Assert
     expect(page).to have_content('Galpões & Estoque')
@@ -14,13 +15,19 @@ describe 'Usuario visita tela inicial' do
   it 'e vê os galpões cadastrados' do
     #Arrange
     #cadastrar 2 galpões: Rio e Maceio
+    User.create!(email: 'bruno@email.com', password: 'password')
     Warehouse.create!(name: 'Rio', code: 'SDU', city:'Rio de Janeiro', area: 60_000, cep: '20000-000', 
                     description:'Galpão do aeroporto do Rio', address: 'Avenida Atlantica, 10')
     Warehouse.create!(name: 'Maceio', code: 'MCZ', city:'Maceio', area: 50_000, cep:'10000-100', 
                     description: 'Galpão do aeroporto de Maceio', address: 'Rua do alemão, 321')
 
     #Act
-    visit(root_path)
+    visit root_path
+    within('form') do
+      fill_in "E-mail",	with: "bruno@email.com"
+      fill_in "Senha",	with: "password" 
+      click_on "Entrar"
+    end
 
     #Assert
     #garantir que eu vejo na tela os galopões Rio e Maceio
@@ -38,9 +45,16 @@ describe 'Usuario visita tela inicial' do
 
   it 'e não existem galpões cadastrados' do
     #Arrange
+    User.create!(email: 'bruno@email.com', password: 'password')
+
 
     #Act
     visit(root_path)
+    within('form') do
+      fill_in "E-mail",	with: "bruno@email.com"
+      fill_in "Senha",	with: "password" 
+      click_on "Entrar"
+    end
 
     #Assert
     expect(page).to have_content('Não existem galpões cadastrados')
