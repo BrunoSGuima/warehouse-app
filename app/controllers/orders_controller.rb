@@ -10,8 +10,11 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.user = current_user
-    @order.save
-    redirect_to @order, notice: "Pedido registrado com sucesso."
+    if @order.save
+      redirect_to @order, notice: "Pedido registrado com sucesso."
+    else
+      redirect_to new_order_path, alert: 'Pedido não registrado.'
+    end
   end
 
   def show
