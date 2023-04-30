@@ -13,13 +13,23 @@ class OrdersController < ApplicationController
     if @order.save
       redirect_to @order, notice: "Pedido registrado com sucesso."
     else
-      redirect_to new_order_path, alert: 'Pedido não registrado.'
+      @warehouses = Warehouse.all
+      @suppliers = Supplier.all
+      flash.now[:alert] = 'Pedido não registrado.'
+      render :new
     end
   end
 
   def show
     @order = Order.find(params[:id])
   end
+
+  def search
+    @code = params["query"]
+
+    @order = Order.find_by(code: params["query"])
+  end
+  
   
   
   private

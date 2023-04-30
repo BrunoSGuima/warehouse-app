@@ -51,9 +51,9 @@ describe 'Usuário cadastra um pedido' do
   it "e o pedido não é registrado" do
     # Arrange
     user = User.create!(name: 'Sergio', email: 'sergio@email.com', password: '12345678')
-    Warehouse.create!(name: 'Aeroporto SP', code: 'SDU', city:'São Paulo', area: 60_000, cep: '20000-000', 
+    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'SDU', city:'São Paulo', area: 60_000, cep: '20000-000', 
       description:'Galpão do aeroporto de SP', address: 'Avenida Atlantica, 10')
-    Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', 
+    supplier = Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', 
                     full_address: 'Rua do Facebook, 09', city: 'São Paulo', 
                       state:'SP', email: 'sac.facebook@facebook.com')
     allow(SecureRandom).to receive(:alphanumeric).and_return('ABC12345')
@@ -67,6 +67,7 @@ describe 'Usuário cadastra um pedido' do
     click_on 'Gravar'
 
     expect(page).to have_content 'Pedido não registrado.'
+    expect(page).to  have_content 'Data Prevista de Entrega deve ser futura'
 
   end
 
