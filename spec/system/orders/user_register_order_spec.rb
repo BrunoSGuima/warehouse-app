@@ -44,6 +44,7 @@ describe 'Usuário cadastra um pedido' do
   expect(page).to  have_content 'Fornecedor: 12645-412 - Meta'
   expect(page).to  have_content 'Usuário Responsável: Sergio - sergio@email.com'
   expect(page).to  have_content 'Data Prevista de Entrega: 20/12/2023'
+  expect(page).to  have_content 'Status do Pedido: Pendente'
   expect(page).not_to have_content 'Galpão Maceio'
   expect(page).not_to have_content 'Microsoft'
   end
@@ -70,6 +71,5 @@ describe 'Usuário cadastra um pedido' do
     expect(page).to  have_content 'Data Prevista de Entrega deve ser futura'
 
   end
-
   
 end

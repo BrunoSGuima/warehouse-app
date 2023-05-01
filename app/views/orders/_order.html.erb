@@ -4,5 +4,7 @@
       <dt> <%= Order.human_attribute_name(:warehouse_id) %>:</dt>
     	<dd><%= order.warehouse.full_description %> </dd>
       <dt> <%= Order.human_attribute_name(:supplier_id) %>: </dt>
-    	<dd><%= order.supplier.sup_description %> </dd> 
+    	<dd><%= order.supplier.sup_description %> </dd>
+      <dt> <%= Order.human_attribute_name(:status) %>: </dt>
+    	<dd><%= I18n.translate(order.status) %> </dd> 
     </dl>

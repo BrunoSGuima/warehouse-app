@@ -90,7 +90,7 @@ RSpec.describe Order, type: :model do
     result = order.code
 
     expect(result).not_to be_empty
-    expect(result.length).to eq 8
+    expect(result.length).to eq 10
       
     end
 

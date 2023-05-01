@@ -21,17 +21,20 @@ describe "Usuário vê seus próprios pedidos" do
     supplier = Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', 
                                 full_address: 'Rua do Facebook, 09', city: 'São Paulo', 
                                 state:'SP', email: 'sac.facebook@facebook.com')
-    first_order = Order.create!(user: first_user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.day.from_now)
-    second_order = Order.create!(user: second_user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.day.from_now)
-    third_order = Order.create!(user: first_user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.week.from_now)
+    first_order = Order.create!(user: first_user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.day.from_now, status: 'pending')
+    second_order = Order.create!(user: second_user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.day.from_now, status: 'delivered')
+    third_order = Order.create!(user: first_user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.week.from_now, status: 'canceled')
     
     login_as(first_user)
     visit root_path
     click_on "Meus Pedidos"
 
     expect(page).to have_content first_order.code
+    expect(page).to have_content 'Pendente' 
     expect(page).to have_content third_order.code
-    expect(page).not_to have_content second_order.code 
+    expect(page).to have_content 'Cancelado'  
+    expect(page).not_to have_content second_order.code
+    expect(page).not_to have_content 'Entregue'
   end
 
   it "e visita um pedido" do
