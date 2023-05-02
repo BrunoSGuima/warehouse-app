@@ -9,5 +9,15 @@
 
 
 <%= link_to('Editar', edit_warehouse_path)%>
-<%= link_to('Voltar', root_path)%>
 <%= button_to 'Remover', warehouse_path, data: { turbo_confirm: "Sure?" }, method: :delete %>
+
+<div>
+	<h2> Itens em Estoque </h2>
+		<% @stocks.each_pair do |pm, quantity| %>
+			<%= quantity %> x <%= pm.sku %>
+		<% end %>
+
+</div>
+
+
+<%= link_to('Voltar', root_path)%>

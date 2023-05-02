@@ -21,9 +21,12 @@ describe "Usuário vê seus próprios pedidos" do
     supplier = Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', 
                                 full_address: 'Rua do Facebook, 09', city: 'São Paulo', 
                                 state:'SP', email: 'sac.facebook@facebook.com')
-    first_order = Order.create!(user: first_user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.day.from_now, status: 'pending')
-    second_order = Order.create!(user: second_user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.day.from_now, status: 'delivered')
-    third_order = Order.create!(user: first_user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.week.from_now, status: 'canceled')
+    first_order = Order.create!(user: first_user, warehouse: warehouse, supplier: supplier, 
+                                estimated_delivery_date: 1.day.from_now, status: 'pending')
+    second_order = Order.create!(user: second_user, warehouse: warehouse, supplier: supplier, 
+                                estimated_delivery_date: 1.day.from_now, status: 'delivered')
+    third_order = Order.create!(user: first_user, warehouse: warehouse, supplier: supplier, 
+                                estimated_delivery_date: 1.week.from_now, status: 'canceled')
     
     login_as(first_user)
     visit root_path
@@ -82,7 +85,33 @@ describe "Usuário vê seus próprios pedidos" do
 
   
   end
-  
-  
-  
+
+  it 'e vê itens do pedido' do
+    supplier = Supplier.create!(corporate_name: 'Meta', brand_name: 'Facebook', registration_number:'12645-412', 
+                                 full_address: 'Rua do Facebook, 09', city: 'São Paulo', 
+                                      state:'SP', email: 'sac.facebook@facebook.com')
+    product_a = ProductModel.create!(name: 'Produto A', weight: 15, width: 10, height: 20, depth: 30, supplier: supplier, sku: 'PRODUTOA')
+    product_b = ProductModel.create!(name: 'Produto B', weight: 15, width: 10, height: 20, depth: 30, supplier: supplier, sku: 'PRODUTOB')
+    product_c = ProductModel.create!(name: 'Produto C', weight: 15, width: 10, height: 20, depth: 30, supplier: supplier, sku: 'PRODUTOC')
+    user = User.create!(name: 'Sergio', email: 'sergio@email.com', password: '12345678')
+    
+    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city:'São Paulo', area: 60_000, cep: '20000-000', 
+                                description:'Galpão do aeroporto de SP', address: 'Avenida Atlantica, 10')
+    order = Order.create!(user: user, warehouse: warehouse, supplier: supplier,
+                          estimated_delivery_date: 1.week.from_now, status: 'pending')
+    OrderItem.create!(product_model: product_a, order: order, quantity: 19)
+    OrderItem.create!(product_model: product_b, order: order, quantity: 12)
+
+    login_as user
+    visit root_path
+    click_on 'Meus Pedidos'
+    click_on order.code
+
+    expect(page).to have_content 'Itens do Pedido'
+    expect(page).to have_content '19 x Produto A'
+    expect(page).to have_content '12 x Produto B'
+
+
+
+  end
 end

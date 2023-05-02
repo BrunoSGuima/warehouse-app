@@ -1,0 +1,8 @@
+pt-BR:
+  aciverecord:
+    models:
+      order_item: 
+    attributes:
+      order_item:
+        quantity: "Quantidade"
+        product_model_id: "Produto"
